@@ -24,13 +24,9 @@ function App() {
 
   const guardarGasto = (gasto) => {
     if (gasto.id) {
-      const gastoEditado = gastos.map((gastoAnterior) => {
-        if (gastoAnterior.id === gasto.id) {
-          gasto.fecha = gastoAnterior.fecha;
-          return gasto;
-        }
-        return gastoAnterior;
-      });
+      const gastoEditado = gastos.map((gastoAnterior) =>
+        gastoAnterior.id === gasto.id ? gasto : gastoAnterior
+      );
       setGastos(gastoEditado);
     } else {
       gasto.id = generarId();
