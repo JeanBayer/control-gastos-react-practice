@@ -9,6 +9,10 @@ function App() {
   const [modal, setModal] = useState(false);
   const [animarModal, setAnimarModal] = useState(false);
 
+  const guardarGasto = (gasto) => {
+    console.log(gasto);
+  }
+
   const handleNuevoGasto = () => {
     setModal(true);
     setTimeout(() => {
@@ -38,6 +42,7 @@ function App() {
           setModal={setModal}
           animarModal={animarModal}
           setAnimarModal={setAnimarModal}
+          guardarGasto={guardarGasto}
         ></Modal>
       )}
     </div>
