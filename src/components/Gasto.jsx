@@ -1,9 +1,17 @@
-import React from 'react'
+import React from "react";
 
-const Gasto = ({gasto}) => {
+const Gasto = ({ gasto }) => {
+  const { categoria, nombre, cantidad, id, fecha } = gasto;
   return (
-    <div>{gasto.nombre}</div>
-  )
-}
+    <div className="gasto sombra">
+      <div className="contenido-gasto">
+        <div className="descripcion-gasto">
+          <p className="categoria">{categoria}</p>
+          <p className="nombre-gasto">{nombre}</p>
+        </div>
+      </div>
+    </div>
+  );
+};
 
-export default Gasto
+export default Gasto;
