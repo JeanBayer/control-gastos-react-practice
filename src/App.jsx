@@ -39,6 +39,11 @@ function App() {
     }, 500);
   };
 
+  const eliminarGasto = (id) => {
+    const gastosFiltrados = gastos.filter((gasto) => gasto.id !== id);
+    setGastos(gastosFiltrados);
+  }
+
   const handleNuevoGasto = () => {
     setGastoEditar({});
     setModal(true);
@@ -61,6 +66,7 @@ function App() {
             <ListadoGastos
               gastos={gastos}
               setGastoEditar={setGastoEditar}
+              eliminarGasto={eliminarGasto}
             ></ListadoGastos>
           </main>
           <div className="nuevo-gasto">
