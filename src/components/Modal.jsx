@@ -36,7 +36,6 @@ const Modal = ({
   };
 
   const handleSubmit = (e) => {
-    setGastoEditar({});
     e.preventDefault();
     if ([nombre, cantidad, categoria].includes("")) {
       setMensaje("Todos los campos son obligatorios");
