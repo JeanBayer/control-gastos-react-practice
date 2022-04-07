@@ -2,7 +2,13 @@ import { useState, useEffect } from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
-const ControlPresupuesto = ({ presupuesto, gastos }) => {
+const ControlPresupuesto = ({
+  setPresupuesto,
+  presupuesto,
+  setGastos,
+  gastos,
+  setIsValidPresupuesto,
+}) => {
   const [porcentaje, setPorcentaje] = useState(0);
   const [disponible, setDisponible] = useState(0);
   const [gastado, setGastado] = useState(0);
@@ -20,6 +26,15 @@ const ControlPresupuesto = ({ presupuesto, gastos }) => {
       setPorcentaje(nuevoPorcentaje);
     }, 1500);
   }, [gastos]);
+
+  const handleResetApp = () => {
+    const resultado = confirm("¿Estás seguro de que quieres resetear la app?");
+    if (resultado) {
+      setPresupuesto(0);
+      setGastos([]);
+      setIsValidPresupuesto(false);
+    }
+  };
 
   const formatearCantidad = (cantidad) => {
     return cantidad.toLocaleString("en-US", {
@@ -41,6 +56,9 @@ const ControlPresupuesto = ({ presupuesto, gastos }) => {
         />
       </div>
       <div className="contenido-presupuesto">
+        <button className="reset-app" type="button" onClick={handleResetApp}>
+          Resetar App
+        </button>
         <p>
           <span>Presupuesto: </span> {formatearCantidad(presupuesto)}
         </p>
