@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Header from "./components/Header";
+import Filtros from "./components/Filtros";
 import ListadoGastos from "./components/ListadoGastos";
 import Modal from "./components/Modal";
 import { generarId } from "./helpers";
@@ -16,6 +17,8 @@ function App() {
     JSON.parse(localStorage.getItem("gastos")) ?? []
   );
   const [gastoEditar, setGastoEditar] = useState({});
+  const [filtro, setFiltro] = useState("");
+  const [gastosFiltrados, setGastosFiltrados] = useState([]);
 
   useEffect(() => {
     if (Object.keys(gastoEditar).length > 0) {
@@ -40,6 +43,16 @@ function App() {
   useEffect(() => {
     localStorage.setItem("gastos", JSON.stringify(gastos) ?? []);
   }, [gastos]);
+
+  useEffect(() => {
+    console.log("first");
+    if (filtro) {
+      const gastosFiltrados = gastos.filter(
+        (gasto) => gasto.categoria === filtro
+      );
+      setGastosFiltrados(gastosFiltrados);
+    }
+  }, [filtro, gastos]);
 
   const guardarGasto = (gasto) => {
     if (gasto.id) {
@@ -82,10 +95,13 @@ function App() {
       {isValidPresupuesto && (
         <>
           <main>
+            <Filtros filtro={filtro} setFiltro={setFiltro} />
             <ListadoGastos
               gastos={gastos}
               setGastoEditar={setGastoEditar}
               eliminarGasto={eliminarGasto}
+              filtro={filtro}
+              gastosFiltrados={gastosFiltrados}
             ></ListadoGastos>
           </main>
           <div className="nuevo-gasto">
