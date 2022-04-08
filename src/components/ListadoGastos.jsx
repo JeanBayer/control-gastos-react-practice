@@ -15,7 +15,7 @@ const ListadoGastos = ({
           <h2>
             {gastosFiltrados.length
               ? "Gastos Filtrados"
-              : "No hay gastos en esta categoría"}
+              : "No hay gastos en esta Selección"}
           </h2>
           {gastosFiltrados.map((gasto) => (
             <Gasto
