@@ -6,10 +6,11 @@ const ListadoGastos = ({
   eliminarGasto,
   filtro,
   gastosFiltrados,
+  filtroMes,
 }) => {
   return (
     <div className="listado-gastos contenedor">
-      {filtro ? (
+      {filtro || filtroMes ? (
         <>
           <h2>
             {gastosFiltrados.length
@@ -22,7 +23,6 @@ const ListadoGastos = ({
               gasto={gasto}
               setGastoEditar={setGastoEditar}
               eliminarGasto={eliminarGasto}
-              filtro={filtro}
             ></Gasto>
           ))}
         </>
@@ -35,7 +35,6 @@ const ListadoGastos = ({
               gasto={gasto}
               setGastoEditar={setGastoEditar}
               eliminarGasto={eliminarGasto}
-              filtro={filtro}
             ></Gasto>
           ))}
         </>

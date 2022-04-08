@@ -18,6 +18,7 @@ function App() {
   );
   const [gastoEditar, setGastoEditar] = useState({});
   const [filtro, setFiltro] = useState("");
+  const [filtroMes, setFiltroMes] = useState("");
   const [gastosFiltrados, setGastosFiltrados] = useState([]);
 
   useEffect(() => {
@@ -45,14 +46,23 @@ function App() {
   }, [gastos]);
 
   useEffect(() => {
-    console.log("first");
-    if (filtro) {
-      const gastosFiltrados = gastos.filter(
+    if (filtroMes) {
+      let gastosFiltrados = gastos.filter(
+        (gasto) => gasto.fecha.substring(0, 7) === filtroMes
+      );
+      if (filtro) {
+        gastosFiltrados = gastosFiltrados.filter(
+          (gasto) => gasto.categoria === filtro
+        );
+      }
+      setGastosFiltrados(gastosFiltrados);
+    } else if (filtro) {
+      let gastosFiltrados = gastos.filter(
         (gasto) => gasto.categoria === filtro
       );
       setGastosFiltrados(gastosFiltrados);
     }
-  }, [filtro, gastos]);
+  }, [filtro, gastos, filtroMes]);
 
   const guardarGasto = (gasto) => {
     if (gasto.id) {
@@ -62,7 +72,6 @@ function App() {
       setGastos(gastoEditado);
     } else {
       gasto.id = generarId();
-      gasto.fecha = Date.now();
       setGastos([...gastos, gasto]);
     }
     setAnimarModal(false);
@@ -96,13 +105,19 @@ function App() {
       {isValidPresupuesto && (
         <>
           <main>
-            <Filtros filtro={filtro} setFiltro={setFiltro} />
+            <Filtros
+              filtro={filtro}
+              setFiltro={setFiltro}
+              filtroMes={filtroMes}
+              setFiltroMes={setFiltroMes}
+            />
             <ListadoGastos
               gastos={gastos}
               setGastoEditar={setGastoEditar}
               eliminarGasto={eliminarGasto}
               filtro={filtro}
               gastosFiltrados={gastosFiltrados}
+              filtroMes={filtroMes}
             ></ListadoGastos>
           </main>
           <div className="nuevo-gasto">

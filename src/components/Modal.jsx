@@ -37,7 +37,7 @@ const Modal = ({
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if ([nombre, cantidad, categoria].includes("")) {
+    if ([nombre, cantidad, categoria, fecha].includes("")) {
       setMensaje("Todos los campos son obligatorios");
       setTimeout(() => {
         setMensaje("");
@@ -101,7 +101,22 @@ const Modal = ({
             <option value="suscripciones">Suscripciones</option>
           </select>
         </div>
-        <input type="submit" value={gastoEditar.nombre ? "Guardar Cambios" : "Añadir Gasto"} />
+        <div className="campo">
+          <label htmlFor="">Fecha</label>
+          <input
+            type="date"
+            name=""
+            id=""
+            value={fecha}
+            onChange={(e) => {
+              setFecha(e.target.value);
+            }}
+          />
+        </div>
+        <input
+          type="submit"
+          value={gastoEditar.nombre ? "Guardar Cambios" : "Añadir Gasto"}
+        />
       </form>
     </div>
   );

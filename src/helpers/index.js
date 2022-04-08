@@ -10,6 +10,7 @@ export const formatearFecha = (fecha) => {
     year: 'numeric',
     month: 'long',
     day: '2-digit',
+    timeZone: 'UTC'
   }
-  return fechaNueva.toLocaleDateString('es-ES', opciones);
+  return fechaNueva.toLocaleDateString('es-EN', opciones);
 }
